@@ -66,7 +66,7 @@ export const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-purple-800">
-                        <Link href="/" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Home</>
+                        <Link to="/" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Home</Link>
                         <a href="#services" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Services</a>
                         <a href="#projects" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Projects</a>
                         <a href="#team" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Our Team</a>
