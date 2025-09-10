@@ -9,13 +9,13 @@ interface TeamMemberProps {
 
 export const TeamMemberCard = ({ name, role, experience, reg, img, index }: TeamMemberProps) => {
     return (
-        <div className={`bg-white rounded-xl shadow-lg overflow-hidden animate-fadeIn stagger-${index + 1} opacity-0 group`}>
+        <div className={`bg-white rounded-xl shadow-lg overflow-hidden group hover-lift scroll-reveal`}>
             <div className="relative h-64 bg-purple-200 overflow-hidden">
                 {img ? (
                     <img 
                         src={img} 
                         alt={`${name} - ${role}`} 
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-110"
                     />
                 ) : (
                     <div className="absolute inset-0 flex items-center justify-center bg-purple-900/40 text-white">

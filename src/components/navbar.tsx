@@ -39,7 +39,7 @@ export const Navbar = () => {
                         <Link to="/projects" className="text-white hover:text-lime-400 transition-colors duration-200">Projects</Link>
                         <a href="#team" className="text-white hover:text-lime-400 transition-colors duration-200">Our Team</a>
                         <a href="#about" className="text-white hover:text-lime-400 transition-colors duration-200">About Us</a>
-                        <a href="#contact" className="bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold px-4 py-2 rounded-md transition-colors duration-200 shine-effect">Contact</a>
+                        <a href="https://wa.me/2347057711880" className="bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold px-4 py-2 rounded-md transition-colors duration-200 shine-effect">Contact</a>
                     </div>
                     
                     {/* Mobile Menu Button */}

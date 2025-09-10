@@ -11,10 +11,14 @@ import haxxyLogo from '../assets/haxxy_logo.png';
 import awoyemi from '../assets/awoyemi.jpg';
 import afolabi from '../assets/afolabi.png';
 import woman from '../assets/woman.png';
+import sewage_pic1 from '../assets/sewage/1.jpg';
+import tankAsBuilt from '../assets/Tanks-As-Built/1.jpg';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import main from '../assets/main.png';
+import { getMainProjectImage } from '../utils/projectImages';
+import { initScrollReveal, applyStaggeredAnimations } from '../utils/animations';
 
 // Define company data
 const companyData = {
@@ -40,12 +44,11 @@ const companyData = {
         }
     ],
     projects: [
-        { title: "12km Pipeline Route Survey – Dangote Refinery", year: 2019, client: "Omitti Engineering Ltd", category: "Land" },
         { title: "Bathymetric Survey – Lekki Lagoon", year: 2022, client: "Private Client", category: "Hydro" },
-        { title: "Topographic Survey – Muhammadu Buhari Estate", year: 2021, client: "Ogun State Government", category: "Land" },
+        { title: "NEPZA", year: 2022, client: "Federal Government of Nigeria", category: "Land" },
         { title: "Aerial Mapping – Proposed Refinery in Ogoni Land", year: 2022, client: "Private Client", category: "Aerial" },
-        { title: "Sewage Pipleline Survey for NEPZA, Freezone, Alaro, Epe, Lagos", year: 2020, client: "NEPZA", category: "Land" },
-        { title: "Tanks as built Survey – Dangote Fertilizer plant", year: 2023, client: "Omitti Engineering Ltd", category: "Land" }
+        { title: "Sewage Pipleline Survey for NEPZA, Freezone, Alaro, Epe, Lagos", year: 2020, client: "NEPZA", category: "Sewage" },
+        { title: "Tanks as built Survey – Dangote Fertilizer plant", year: 2023, client: "Omitti Engineering Ltd", category: "tank" }
     ],
     team: [
         { name: "Surv. Hassan Lateef", role: "Managing Director", experience: "13+ years", reg: "SURCON Reg. No. 4869", img: "/assets/team/hassan.jpg" },
@@ -106,9 +109,19 @@ export const LandingPage = () => {
         const teamItems = document.querySelectorAll('#team .scroll-item');
         teamItems.forEach((item) => teamObserver.observe(item));
         
+        // Initialize scroll reveal animations
+        const cleanupScrollReveal = initScrollReveal();
+        
+        // Apply staggered animations to services
+        applyStaggeredAnimations('#services .grid', '.service-card', 'animate-scaleIn', 100, 150);
+        
+        // Apply staggered animations to core values
+        applyStaggeredAnimations('#about .grid-cols-2', 'div', 'animate-fadeIn', 100, 100);
+        
         return () => {
             projectObserver.disconnect();
             teamObserver.disconnect();
+            cleanupScrollReveal();
         };
     }, []);
     
@@ -208,12 +221,12 @@ export const LandingPage = () => {
                                     {companyData.tagline}
                                 </p>
                                 <div className="flex flex-wrap gap-4 animate-fadeIn stagger-2 opacity-0">
-                                    <button className="px-6 py-3 bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold rounded-lg transition-colors duration-200 shine-effect">
+                                    <a href="#services" className="px-6 py-3 bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold rounded-lg transition-colors duration-200 shine-effect">
                                         Our Services
-                                    </button>
-                                    <button className="px-6 py-3 bg-transparent hover:bg-purple-800/50 text-white border-2 border-lime-400 rounded-lg transition-colors duration-200">
+                                    </a>
+                                    <a href="https://wa.me/2347057711880" className="px-6 py-3 bg-transparent hover:bg-purple-800/50 text-white border-2 border-lime-400 rounded-lg transition-colors duration-200">
                                         Contact Us
-                                    </button>
+                                    </a>
                                 </div>
                             </div>
                             <div className="md:w-1/2 mt-10 md:mt-0 z-10 animate-fadeIn stagger-3 opacity-0">
@@ -235,14 +248,14 @@ export const LandingPage = () => {
             <section id="about" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4">About <span className="text-gradient">HAXXY</span></h2>
-                        <p className="max-w-3xl mx-auto text-gray-600">
+                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4 scroll-reveal">About <span className="text-gradient">HAXXY</span></h2>
+                        <p className="max-w-3xl mx-auto text-gray-600 scroll-reveal">
                             {companyData.description}
                         </p>
                     </div>
                     
                     <div className="grid md:grid-cols-2 gap-10">
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                        <div className="bg-white p-8 rounded-xl shadow-lg hover-lift scroll-reveal">
                             <div className="w-16 h-16 rounded-full bg-purple-100 flex items-center justify-center mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-purple-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -254,7 +267,7 @@ export const LandingPage = () => {
                             </p>
                         </div>
                         
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                        <div className="bg-white p-8 rounded-xl shadow-lg hover-lift scroll-reveal">
                             <div className="w-16 h-16 rounded-full bg-lime-100 flex items-center justify-center mb-6">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-lime-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -269,10 +282,10 @@ export const LandingPage = () => {
                     </div>
                     
                     <div className="mt-16">
-                        <h3 className="text-2xl font-bold text-purple-900 mb-6 text-center">Our Core Values</h3>
+                        <h3 className="text-2xl font-bold text-purple-900 mb-6 text-center scroll-reveal">Our Core Values</h3>
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                             {companyData.coreValues.map((value, index) => (
-                                <div key={index} className="bg-white p-4 rounded-lg shadow text-center border-b-4 border-lime-500 hover:transform hover:scale-105 transition-transform">
+                                <div key={index} className="bg-white p-4 rounded-lg shadow text-center border-b-4 border-lime-500 hover-scale transition-transform scroll-reveal">
                                     <span className="block text-lg font-bold text-purple-900">{value}</span>
                                 </div>
                             ))}
@@ -285,8 +298,8 @@ export const LandingPage = () => {
             <section id="services" className="py-20 bg-purple-900 text-white">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-16">
-                        <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="text-lime-400">Services</span></h2>
-                        <p className="max-w-3xl mx-auto text-gray-300">
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 scroll-reveal">Our <span className="text-lime-400">Services</span></h2>
+                        <p className="max-w-3xl mx-auto text-gray-300 scroll-reveal">
                             We offer comprehensive surveying solutions that combine technical expertise with innovative technology.
                         </p>
                     </div>
@@ -320,11 +333,11 @@ export const LandingPage = () => {
             <section id="projects" className="py-20 bg-gray-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4">Featured <span className="text-gradient">Projects</span></h2>
-                        <p className="max-w-3xl mx-auto text-gray-600 mb-6">
+                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4 scroll-reveal">Featured <span className="text-gradient">Projects</span></h2>
+                        <p className="max-w-3xl mx-auto text-gray-600 mb-6 scroll-reveal">
                             Explore some of our most successful projects delivered with precision and excellence.
                         </p>
-                        <div className="flex items-center justify-center text-purple-900 text-sm">
+                        <div className="flex items-center justify-center text-purple-900 text-sm scroll-reveal">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
@@ -334,16 +347,18 @@ export const LandingPage = () => {
                     
                     <div className="scroll-container" ref={projectsContainerRef}>
                         {companyData.projects.map((project, index) => {
-                            // Use appropriate images based on category
+                            // Get project-specific image using appropriate image source
                             let projectImage;
-                            if (project.category === "Land") {
-                                projectImage = land_pic1;
-                            } else if (project.category === "Aerial") {
-                                projectImage = aerial_pic1;
-                            } else {
-                                projectImage = surveyor_pic1;
-                            }
                             
+                            if (project.category === "tank") {
+                                projectImage = tankAsBuilt;
+                            } else if (project.category === "Sewage") {
+                                projectImage = sewage_pic1;
+                            } else {
+                                // Use utility for other categories
+                                projectImage = getMainProjectImage(project.title, project.category);
+                            }
+
                             return (
                                 <div className="scroll-item" key={index} data-index={index}>
                                     <ProjectCard 
@@ -398,11 +413,11 @@ export const LandingPage = () => {
             <section id="team" className="py-20 bg-purple-50">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4">Our <span className="text-gradient">Team</span></h2>
-                        <p className="max-w-3xl mx-auto text-gray-600 mb-6">
+                        <h2 className="text-3xl md:text-4xl font-bold text-purple-900 mb-4 scroll-reveal">Our <span className="text-gradient">Team</span></h2>
+                        <p className="max-w-3xl mx-auto text-gray-600 mb-6 scroll-reveal">
                             Meet the professionals behind our success. Our team combines decades of surveying expertise with a passion for innovation.
                         </p>
-                        <div className="flex items-center justify-center text-purple-900 text-sm">
+                        <div className="flex items-center justify-center text-purple-900 text-sm scroll-reveal">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                             </svg>
@@ -499,7 +514,9 @@ export const LandingPage = () => {
                                     </svg>
                                     <div>
                                         {companyData.contact.phones.map((phone, index) => (
-                                            <p key={index}>{phone}</p>
+                                            <a href={`https://wa.me/234${phone.substring(1)}`} key={index} className="hover:text-lime-400 transition-colors">
+                                                {phone}
+                                            </a>
                                         ))}
                                     </div>
                                 </div>
@@ -537,7 +554,11 @@ export const LandingPage = () => {
                                     <textarea className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" id="message" placeholder="Your Message" rows={4}></textarea>
                                 </div>
                                 
-                                <button className="w-full bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline shine-effect" type="button">
+                                <button 
+                                    className="w-full bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline shine-effect" 
+                                    type="button"
+                                    onClick={() => window.open('https://wa.me/2347057711880', '_blank')}
+                                >
                                     Send Message
                                 </button>
                             </form>

@@ -2,33 +2,30 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Navbar } from '../components/navbar';
-import surveyor_pic1 from '../assets/surv_hassan.png';
-import land_pic1 from '../assets/land.png';
-import aerial_pic1 from '../assets/drone.png';
 import { Helmet } from 'react-helmet-async';
+import { getProjectImages, getMainProjectImage } from '../utils/projectImages';
+import { initScrollReveal } from '../utils/animations';
 
 // Import company data (in a real app, this would be in a shared location)
 const companyData = {
     name: "Haxxy Land Surveys Limited",
     rcNumber: "RC 1938018",
     projects: [
-        { 
-            title: "12km Pipeline Route Survey – Dangote Refinery", 
-            year: 2019, 
-            client: "Omitti Engineering Ltd", 
+        {
+            title: "Control Establishment at Dangote Refinery",
+            year: 2018,
+            client: "Dangote Refinery",
             category: "Land",
-            description: "A comprehensive survey for the 12km pipeline route connecting the Dangote Refinery to external infrastructure. This project involved detailed topographic mapping, ground truthing, and precise coordinate establishment.",
+            description: "Establishment of control points for accurate surveying.",
             challenges: [
-                "Complex terrain with varying elevations",
-                "Crossing multiple property boundaries",
-                "Coordination with environmental impact assessments"
+                "Accessing remote locations",
+                "Ensuring equipment precision"
             ],
             solutions: [
-                "Employed advanced GPS equipment for accurate coordinate placement",
-                "Utilized GIS mapping for comprehensive documentation",
-                "Collaborated with environmental teams to minimize ecological impact"
+                "Utilized drones for site assessment",
+                "Implemented rigorous quality control measures"
             ],
-            outcomes: "Successfully delivered accurate survey data enabling the pipeline construction with minimal deviations. The project was completed ahead of schedule and contributed to the timely development of the refinery's infrastructure."
+            outcomes: "Successfully established a network of control points, enhancing the accuracy of future surveys."
         },
         { 
             title: "Bathymetric Survey – Lekki Lagoon", 
@@ -103,7 +100,7 @@ const companyData = {
             outcomes: "Delivered precise survey data that enabled efficient pipeline installation with minimal adjustments during construction. The survey helped optimize the pipeline route to utilize natural gravity flow where possible, reducing pumping requirements."
         },
         { 
-            title: "Tanks as built Survey – Dangote Fertilizer plant", 
+            title: "Tanks As-Built Survey – Dangote Fertilizer plant", 
             year: 2023, 
             client: "Omitti Engineering Ltd", 
             category: "Land",
@@ -127,25 +124,24 @@ export const ProjectsPage = () => {
     const { projectId } = useParams<{projectId: string}>();
     const [activeProject, setActiveProject] = useState(projectId ? parseInt(projectId) : 0);
     const [showVideo, setShowVideo] = useState(false);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
     
     useEffect(() => {
         window.scrollTo(0, 0);
         document.title = `Projects | ${companyData.name}`;
-    }, []);
+        // Reset active image when project changes
+        setActiveImageIndex(0);
+        
+        // Initialize scroll reveal animations
+        const cleanupScrollReveal = initScrollReveal();
+        
+        return () => {
+            cleanupScrollReveal();
+        };
+    }, [activeProject]);
     
     // Get the current project data
     const project = companyData.projects[activeProject];
-    
-    // Helper function to get appropriate image based on category
-    const getProjectImage = (category: string) => {
-        if (category === "Land") {
-            return land_pic1;
-        } else if (category === "Aerial") {
-            return aerial_pic1;
-        } else {
-            return surveyor_pic1;
-        }
-    };
     
     
     return (
@@ -204,14 +200,14 @@ export const ProjectsPage = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             {/* Project Navigation Sidebar */}
                             <div className="md:col-span-1">
-                                <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                                <div className="bg-white rounded-xl shadow-lg p-6 sticky top-24 scroll-reveal">
                                     <h3 className="text-xl font-bold text-purple-900 mb-6">All Projects</h3>
                                     <nav>
                                         <ul className="space-y-2">
                                             {companyData.projects.map((p, index) => (
                                                 <li key={index}>
                                                     <button
-                                                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 ${
+                                                        className={`w-full text-left px-4 py-3 rounded-lg transition-colors duration-200 hover-scale ${
                                                             activeProject === index
                                                                 ? 'bg-purple-100 text-purple-900 font-bold'
                                                                 : 'hover:bg-gray-100 text-gray-700'
@@ -240,7 +236,7 @@ export const ProjectsPage = () => {
                             <div className="md:col-span-2">
                                 <div className="bg-white rounded-xl shadow-lg overflow-hidden">
                                     {/* Project Image/Video Section */}
-                                    <div className="relative h-80 md:h-96 bg-purple-200">
+                                    <div className="relative bg-purple-200">
                                         {showVideo ? (
                                             // Video placeholder
                                             <div className="absolute inset-0 flex items-center justify-center bg-black">
@@ -255,16 +251,43 @@ export const ProjectsPage = () => {
                                                 </div>
                                             </div>
                                         ) : (
-                                            // Image display
-                                            <div className="relative h-full">
-                                                <img 
-                                                    src={getProjectImage(project.category)} 
-                                                    alt={project.title} 
-                                                    className="w-full h-full object-cover"
-                                                />
-                                                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-purple-900/70"></div>
-                                                
-                                                {/* Image/Video toggle button */}
+                                            // Project Gallery
+                                                <div className="p-4">
+                                                    {/* Project Gallery Component */}
+                                                    <div className="relative">
+                                                        {/* Main image display */}
+                                                        <div className="relative aspect-video overflow-hidden rounded-lg">
+                                                            <img 
+                                                                src={getProjectImages(project.title) && getProjectImages(project.title)!.length > 0 
+                                                                    ? getProjectImages(project.title)![activeImageIndex] 
+                                                                    : getMainProjectImage(project.title, project.category)} 
+                                                                alt={`${project.title}`} 
+                                                                className="w-full h-full object-contain bg-gray-100"
+                                                            />
+                                                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-purple-900/40"></div>
+                                                        </div>
+                                                        
+                                                        {/* Thumbnail navigation */}
+                                                        {getProjectImages(project.title) && getProjectImages(project.title)!.length > 1 && (
+                                                            <div className="mt-4 flex space-x-2 overflow-x-auto pb-2">
+                                                                {getProjectImages(project.title)!.map((image, index) => (
+                                                                    <button
+                                                                        key={index}
+                                                                        onClick={() => setActiveImageIndex(index)}
+                                                                        className={`flex-shrink-0 w-16 h-16 rounded-md overflow-hidden border-2 transition-all ${
+                                                                            activeImageIndex === index ? 'border-lime-500 scale-110' : 'border-transparent opacity-70'
+                                                                        }`}
+                                                                    >
+                                                                        <img 
+                                                                            src={image} 
+                                                                            alt={`${project.title} thumbnail ${index + 1}`} 
+                                                                            className="w-full h-full object-contain bg-gray-50"
+                                                                        />
+                                                                    </button>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>                                                {/* Image/Video toggle button */}
                                                 <button 
                                                     className="absolute bottom-4 right-4 bg-purple-900 hover:bg-purple-800 text-white rounded-full p-3 shadow-lg transition-colors duration-200"
                                                     onClick={() => setShowVideo(true)}
@@ -287,22 +310,33 @@ export const ProjectsPage = () => {
                                     
                                     {/* Project Content */}
                                     <div className="p-6 md:p-8">
-                                        <div className="flex justify-between items-start mb-6">
+                                        <div className="flex justify-between items-start mb-6 scroll-reveal">
                                             <h2 className="text-2xl md:text-3xl font-bold text-purple-900">{project.title}</h2>
+                                            <span className={`px-3 py-1 text-sm rounded-lg ${
+                                                project.category === "Land" ? "bg-green-100 text-green-800" :
+                                                project.category === "Aerial" ? "bg-blue-100 text-blue-800" :
+                                                project.category === "tank" ? "bg-orange-100 text-orange-800" :
+                                                "bg-indigo-100 text-indigo-800"
+                                            }`}>
+                                                {project.category === "tank" ? "Tank" : project.category}
+                                            </span>
+                                        </div>
+                                        
+                                        <div className="mb-4 scroll-reveal">
                                             <span className="text-lime-600 font-medium">Client: {project.client}</span>
                                         </div>
                                         
-                                        <p className="text-gray-700 mb-8">
+                                        <p className="text-gray-700 mb-8 scroll-reveal">
                                             {project.description}
                                         </p>
                                         
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                                             {/* Challenges */}
-                                            <div className="bg-purple-50 rounded-lg p-6">
+                                            <div className="bg-purple-50 rounded-lg p-6 hover-lift scroll-reveal">
                                                 <h3 className="text-xl font-bold text-purple-900 mb-4">Challenges</h3>
                                                 <ul className="space-y-2">
                                                     {project.challenges.map((challenge, index) => (
-                                                        <li key={index} className="flex items-start">
+                                                        <li key={index} className="flex items-start animate-slideInLeft" style={{animationDelay: `${index * 100}ms`}}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-lime-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                                                             </svg>
@@ -313,11 +347,11 @@ export const ProjectsPage = () => {
                                             </div>
                                             
                                             {/* Solutions */}
-                                            <div className="bg-purple-50 rounded-lg p-6">
+                                            <div className="bg-purple-50 rounded-lg p-6 hover-lift scroll-reveal">
                                                 <h3 className="text-xl font-bold text-purple-900 mb-4">Our Solutions</h3>
                                                 <ul className="space-y-2">
                                                     {project.solutions.map((solution, index) => (
-                                                        <li key={index} className="flex items-start">
+                                                        <li key={index} className="flex items-start animate-slideInRight" style={{animationDelay: `${index * 100}ms`}}>
                                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-lime-500 mr-2 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                             </svg>
@@ -338,13 +372,40 @@ export const ProjectsPage = () => {
                                         <div className="mt-8">
                                             <h3 className="text-xl font-bold text-purple-900 mb-4">Project Gallery</h3>
                                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                                                {[1, 2, 3, 4].map((item) => (
-                                                    <div key={item} className="bg-purple-100 rounded-lg aspect-square overflow-hidden relative hover:opacity-90 transition-opacity cursor-pointer">
-                                                        <div className="absolute inset-0 flex items-center justify-center text-purple-900">
-                                                            <span className="text-sm font-medium">Photo {item}</span>
+                                                {getProjectImages(project.title) && getProjectImages(project.title)!.length > 0 ? 
+                                                    // If we have project images, show them
+                                                    getProjectImages(project.title)!.map((image, index) => (
+                                                        <div key={index} className="rounded-lg aspect-square overflow-hidden relative hover:opacity-90 transition-opacity cursor-pointer">
+                                                            <img 
+                                                                src={image} 
+                                                                alt={`${project.title} image ${index + 1}`} 
+                                                                className="w-full h-full object-contain bg-gray-100 hover:scale-105 transition-transform duration-300"
+                                                            />
                                                         </div>
-                                                    </div>
-                                                ))}
+                                                    ))
+                                                    : 
+                                                    // Otherwise show placeholder
+                                                    project.category === "tank" ? 
+                                                    // Tank specific images
+                                                    [1, 2, 3, 4].map((item) => (
+                                                        <div key={item} className="rounded-lg aspect-square overflow-hidden relative hover:opacity-90 transition-opacity cursor-pointer">
+                                                            <img 
+                                                                src={`/assets/Tanks-As-Built/${item}.jpg`} 
+                                                                alt={`${project.title} image ${item}`} 
+                                                                className="w-full h-full object-contain bg-gray-100 hover:scale-105 transition-transform duration-300"
+                                                            />
+                                                        </div>
+                                                    ))
+                                                    :
+                                                    // Default placeholders for other categories
+                                                    [1, 2, 3, 4].map((item) => (
+                                                        <div key={item} className="bg-purple-100 rounded-lg aspect-square overflow-hidden relative hover:opacity-90 transition-opacity cursor-pointer">
+                                                            <div className="absolute inset-0 flex items-center justify-center text-purple-900">
+                                                                <span className="text-sm font-medium">Photo {item}</span>
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                }
                                             </div>
                                         </div>
                                     </div>

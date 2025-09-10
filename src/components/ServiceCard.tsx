@@ -12,9 +12,9 @@ export const ServiceCard = ({ category, items, image, index }: ServiceCardProps)
     const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
     
     return (
-        <div className={`bg-white rounded-xl shadow-xl overflow-hidden animate-fadeIn stagger-${index + 1} opacity-0`}>
+        <div className={`bg-white rounded-xl shadow-xl overflow-hidden service-card hover-lift scroll-reveal`}>
             <div className="relative h-48 bg-purple-200 overflow-hidden">
-                <img src={image} alt={category} className="w-full h-full object-cover" />
+                <img src={image} alt={category} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
                 <div className="absolute inset-0 bg-purple-900/30 flex items-center justify-center">
                     <h3 className="text-2xl font-bold text-white px-4 py-2 bg-purple-900/70 rounded">{category}</h3>
                 </div>
