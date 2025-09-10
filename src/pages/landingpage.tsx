@@ -189,7 +189,7 @@ export const LandingPage = () => {
             <Navbar />
             
             {/* Hero Section */}
-            <section id="home" className="pt-0 md:pt-0">
+            <section id="home" className="pt-5 md:pt-3">
                 <div className="bg-gradient-purple-green clip-diagonal min-h-screen flex flex-col justify-center relative overflow-hidden">
                     {/* Decorative Elements */}
                     <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-lime-300/10 float-animation"></div>
