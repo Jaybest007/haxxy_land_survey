@@ -189,7 +189,7 @@ export const LandingPage = () => {
             <Navbar />
             
             {/* Hero Section */}
-            <section id="home" className="pt-2 md:pt-0">
+            <section id="home" className="pt-0 md:pt-0">
                 <div className="bg-gradient-purple-green clip-diagonal min-h-screen flex flex-col justify-center relative overflow-hidden">
                     {/* Decorative Elements */}
                     <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-lime-300/10 float-animation"></div>
@@ -199,7 +199,7 @@ export const LandingPage = () => {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-24">
                         <div className="md:flex items-center">
                             <div className="md:w-1/2 z-10 animate-fadeIn opacity-0">
-                                <span className="inline-block py-1 px-3 rounded-full bg-lime-400/20 text-lime-400 font-semibold text-sm mb-5">
+                                <span className="inline-block mt-3 py-1 px-3 rounded-full bg-lime-400/20 text-lime-400 font-semibold text-sm mb-5">
                                     {companyData.rcNumber}
                                 </span>
                                 <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
