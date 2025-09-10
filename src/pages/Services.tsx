@@ -5,6 +5,7 @@ import { Navbar } from '../components/navbar';
 import land_pic1 from '../assets/land.png';
 import aerial_pic1 from '../assets/drone.png';
 import Hydrographic from '../assets/Hydrographic.png';
+
 import { Helmet } from 'react-helmet-async';
 
 // Define service data with detailed information

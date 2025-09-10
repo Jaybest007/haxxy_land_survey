@@ -3,7 +3,6 @@ import { Navbar } from '../components/navbar';
 import { ServiceCard } from '../components/ServiceCard';
 import { ProjectCard } from '../components/ProjectCard';
 import { TeamMemberCard } from '../components/TeamMemberCard';
-import mordern from '../assets/mordern_pic.jpg';
 import surveyor_pic1 from '../assets/surv_hassan.png';
 import Hydrographic from '../assets/Hydrographic.png';
 import aerial_pic1 from '../assets/drone.png';
@@ -15,6 +14,7 @@ import woman from '../assets/woman.png';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import main from '../assets/main.png';
 
 // Define company data
 const companyData = {
@@ -189,7 +189,7 @@ export const LandingPage = () => {
             <Navbar />
             
             {/* Hero Section */}
-            <section id="home" className="pt-5 md:pt-3">
+            <section id="home" className="pt-2 md:pt-0">
                 <div className="bg-gradient-purple-green clip-diagonal min-h-screen flex flex-col justify-center relative overflow-hidden">
                     {/* Decorative Elements */}
                     <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-lime-300/10 float-animation"></div>
@@ -220,7 +220,11 @@ export const LandingPage = () => {
                             </div>
                             <div className="md:w-1/2 mt-10 md:mt-0 z-10 animate-fadeIn stagger-3 opacity-0">
                                 <div className="aspect-[4/3] rounded-lg relative overflow-hidden shadow-2xl border-4 border-white/20">
-                                    <img src={mordern} alt="Modern Surveying" className="w-full h-full object-cover" />
+                                    <img 
+                                        src={main} 
+                                        alt="Modern Surveying Equipment and Professionals" 
+                                        className="w-full h-full object-cover object-center" 
+                                    />
                                     <div className="absolute inset-0 bg-purple-900/20"></div>
                                 </div>
                             </div>
