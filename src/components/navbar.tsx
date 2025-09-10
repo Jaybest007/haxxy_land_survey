@@ -66,12 +66,12 @@ export const Navbar = () => {
             {isMobileMenuOpen && (
                 <div className="md:hidden">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-purple-800">
-                        <a href="#home" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Home</a>
+                        <Link href="/" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Home</>
                         <a href="#services" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Services</a>
                         <a href="#projects" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Projects</a>
                         <a href="#team" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">Our Team</a>
                         <a href="#about" className="block px-3 py-2 text-white hover:bg-purple-700 hover:text-lime-400 rounded-md">About Us</a>
-                        <a href="#contact" className="block px-3 py-2 bg-lime-500 text-purple-900 font-bold rounded-md text-center">Contact</a>
+                        <a href="https://wa.me/2347057711880" className="block px-3 py-2 bg-lime-500 text-purple-900 font-bold rounded-md text-center">Contact</a>
                     </div>
                     <div className="px-5 py-3 border-t border-purple-700 bg-purple-900/90">
                         <p className="text-xs text-lime-400 font-medium">Precision. Integrity. Innovation.</p>
