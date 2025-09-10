@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://haxxysurvey.com/sitemap.xml
+
+# Disallow specific files or directories if needed
+# Disallow: /private/

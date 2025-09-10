@@ -2,10 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Navbar } from '../components/navbar';
-import mordern from '../assets/mordern_pic.jpg';
 import surveyor_pic1 from '../assets/surv_hassan.png';
 import land_pic1 from '../assets/land.png';
 import aerial_pic1 from '../assets/drone.png';
+import { Helmet } from 'react-helmet-async';
 
 // Import company data (in a real app, this would be in a shared location)
 const companyData = {
@@ -147,8 +147,41 @@ export const ProjectsPage = () => {
         }
     };
     
+    
     return (
         <>
+            <Helmet>
+                <title>Projects | Haxxy Land Surveys Limited</title>
+                <meta name="description" content="Explore Haxxy Land Surveys' portfolio of successful surveying projects across Nigeria, showcasing our expertise in land, aerial, and hydrographic surveying." />
+                <meta name="keywords" content="Haxxy projects, land survey projects, aerial survey projects, hydrographic survey projects, Nigeria surveying projects, Dangote Refinery survey" />
+                <meta property="og:title" content="Projects | Haxxy Land Surveys Limited" />
+                <meta property="og:description" content="Explore our portfolio of successful surveying projects that showcase our expertise, precision, and commitment to excellence across Nigeria." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://haxxysurvey.com/projects" />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Projects | Haxxy Land Surveys Limited" />
+                <meta name="twitter:description" content="Explore our portfolio of successful surveying projects that showcase our expertise, precision, and commitment to excellence across Nigeria." />
+                <link rel="canonical" href="https://haxxysurvey.com/projects" />
+                {projectId && (
+                    <script type="application/ld+json">
+                    {`
+                        {
+                            "@context": "https://schema.org",
+                            "@type": "Project",
+                            "name": "${project.title}",
+                            "description": "${project.description}",
+                            "provider": {
+                                "@type": "Organization",
+                                "name": "${companyData.name}",
+                                "sameAs": "https://haxxysurvey.com"
+                            },
+                            "category": "${project.category} Surveying",
+                            "dateCompleted": "${project.year}"
+                        }
+                    `}
+                    </script>
+                )}
+            </Helmet>
             <Navbar />
             
             <main className="pt-20">

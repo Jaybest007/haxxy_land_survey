@@ -9,8 +9,12 @@ import Hydrographic from '../assets/Hydrographic.png';
 import aerial_pic1 from '../assets/drone.png';
 import land_pic1 from '../assets/land.png';
 import haxxyLogo from '../assets/haxxy_logo.png';
+import awoyemi from '../assets/awoyemi.jpg';
+import afolabi from '../assets/afolabi.png';
+import woman from '../assets/woman.png';
 import { useEffect, useState, useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 // Define company data
 const companyData = {
@@ -128,20 +132,71 @@ export const LandingPage = () => {
     return (
         <>
             <Helmet>
-                <title>Haxxy Land Surveys Limited</title>
+                <title>Haxxy Land Surveys Limited - Professional Surveying Services in Nigeria</title>
+                <meta name="description" content="HAXXY Land Surveys Limited is a leading surveying firm delivering professional land, aerial, and hydrographic services across Nigeria with precision and integrity. RC 1938018." />
+                <meta name="keywords" content="Haxxy, Haxxy Land Surveys, Haxxy Survey, Land Surveying, Aerial Surveying, Hydrographic Surveying, Nigeria Surveying Company, Haxy, RC 1938018" />
+                <meta property="og:title" content="Haxxy Land Surveys Limited" />
+                <meta property="og:description" content="Professional surveying services in Nigeria including land, aerial, and hydrographic surveying with precision and integrity." />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://haxxysurvey.com/" />
+                <meta property="og:image" content={haxxyLogo} />
+                <meta name="twitter:card" content="summary_large_image" />
+                <meta name="twitter:title" content="Haxxy Land Surveys Limited" />
+                <meta name="twitter:description" content="Professional surveying services in Nigeria including land, aerial, and hydrographic surveying with precision and integrity." />
+                <link rel="canonical" href="https://haxxysurvey.com/" />
                 <link rel="icon" href={haxxyLogo} />
+                <script type="application/ld+json">
+                {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "LocalBusiness",
+                        "name": "${companyData.name}",
+                        "legalName": "${companyData.name}",
+                        "alternateName": "Haxxy Survey",
+                        "description": "${companyData.description}",
+                        "image": "https://haxxysurvey.com/logo.png",
+                        "url": "https://haxxysurvey.com",
+                        "telephone": "${companyData.contact.phones[0]}",
+                        "email": "${companyData.contact.email}",
+                        "address": {
+                            "@type": "PostalAddress",
+                            "streetAddress": "Km 36, Lekki-Epe Expressway, Mobil Filling Station, Oribanwa Bus-stop",
+                            "addressLocality": "Ibeju-Lekki",
+                            "addressRegion": "Lagos",
+                            "addressCountry": "Nigeria"
+                        },
+                        "founder": "Surv. Hassan Lateef",
+                        "foundingDate": "2018",
+                        "sameAs": [
+                            "https://www.instagram.com/${companyData.contact.instagram.replace('@', '')}"
+                        ],
+                        "openingHours": "Mo,Tu,We,Th,Fr 08:00-17:00",
+                        "priceRange": "₦₦-₦₦₦",
+                        "serviceArea": {
+                            "@type": "GeoCircle",
+                            "geoMidpoint": {
+                                "@type": "GeoCoordinates",
+                                "latitude": 6.4550,
+                                "longitude": 3.3841
+                            },
+                            "geoRadius": "500km"
+                        },
+                        "keywords": "Haxxy, Haxxy Land Surveys, Haxxy Survey, Haxy, Land Surveying, Aerial Surveying, Hydrographic Surveying, Nigeria Surveying Company"
+                    }
+                `}
+                </script>
             </Helmet>
             <Navbar />
             
             {/* Hero Section */}
-            <section id="home" className="pt-24 md:pt-0">
+            <section id="home" className="pt-0 md:pt-0">
                 <div className="bg-gradient-purple-green clip-diagonal min-h-screen flex flex-col justify-center relative overflow-hidden">
                     {/* Decorative Elements */}
                     <div className="absolute top-20 right-10 w-40 h-40 rounded-full bg-lime-300/10 float-animation"></div>
                     <div className="absolute bottom-40 left-10 w-20 h-20 rounded-full bg-lime-300/10"></div>
                     <div className="absolute top-40 left-[30%] w-64 h-64 rounded-full bg-purple-700/20"></div>
                     
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-24">
                         <div className="md:flex items-center">
                             <div className="md:w-1/2 z-10 animate-fadeIn opacity-0">
                                 <span className="inline-block py-1 px-3 rounded-full bg-lime-400/20 text-lime-400 font-semibold text-sm mb-5">
@@ -330,9 +385,9 @@ export const LandingPage = () => {
                     </div>
                     
                     <div className="text-center mt-12">
-                        <button className="px-6 py-3 bg-purple-900 hover:bg-purple-800 text-white font-bold rounded-lg transition-colors duration-200">
+                        <Link to="/projects" className="px-6 py-3 bg-purple-900 hover:bg-purple-800 text-white font-bold rounded-lg transition-colors duration-200">
                             View All Projects
-                        </button>
+                        </Link>
                     </div>
                 </div>
             </section>
@@ -359,11 +414,11 @@ export const LandingPage = () => {
                             if (member.name === "Surv. Hassan Lateef") {
                                 teamImage = surveyor_pic1;
                             } else if (member.name === "Engr. Awoyemi Ajiboye") {
-                                teamImage = aerial_pic1;
+                                teamImage = awoyemi;
                             } else if (member.name === "Surv. Oluwadare Afolabi") {
-                                teamImage = land_pic1;
+                                teamImage = afolabi;
                             } else {
-                                teamImage = Hydrographic;
+                                teamImage = woman;
                             }
 
                             return (

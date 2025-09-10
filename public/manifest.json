@@ -1,0 +1,21 @@
+{
+  "name": "Haxxy Land Surveys Limited",
+  "short_name": "Haxxy Survey",
+  "description": "Professional surveying services across Nigeria including land, aerial, and hydrographic surveying with precision and integrity.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#5b21b6",
+  "theme_color": "#5b21b6",
+  "icons": [
+    {
+      "src": "/haxxy_logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/haxxy_logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -5,6 +5,7 @@ import { Navbar } from '../components/navbar';
 import land_pic1 from '../assets/land.png';
 import aerial_pic1 from '../assets/drone.png';
 import Hydrographic from '../assets/Hydrographic.png';
+import { Helmet } from 'react-helmet-async';
 
 // Define service data with detailed information
 const serviceData = {
@@ -269,6 +270,61 @@ export const ServicesPage = () => {
     
     return (
         <>
+            <Helmet>
+                <title>{serviceCategory 
+                    ? `${service.category} | Haxxy Land Surveys Limited` 
+                    : `Professional Surveying Services | Haxxy Land Surveys Limited`}
+                </title>
+                <meta name="description" content={serviceCategory 
+                    ? `${service.description.substring(0, 150)}...` 
+                    : "Professional land, aerial, and hydrographic surveying services across Nigeria by Haxxy Land Surveys Limited. Precision, integrity, and innovation in every project."} 
+                />
+                <meta name="keywords" content={serviceCategory 
+                    ? `Haxxy, ${service.category}, ${service.items.join(', ')}, Nigeria surveying` 
+                    : "Haxxy, land surveying, aerial surveying, hydrographic surveying, Nigeria surveying company, cadastral survey, bathymetric survey, drone survey"} 
+                />
+                <meta property="og:title" content={serviceCategory 
+                    ? `${service.category} | Haxxy Land Surveys Limited` 
+                    : `Professional Surveying Services | Haxxy Land Surveys Limited`} 
+                />
+                <meta property="og:description" content={serviceCategory 
+                    ? service.description.substring(0, 150) 
+                    : "Professional land, aerial, and hydrographic surveying services across Nigeria. Precision, integrity, and innovation in every project."} 
+                />
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={`https://haxxysurvey.com/services${serviceCategory ? '/' + serviceCategory : ''}`} />
+                <link rel="canonical" href={`https://haxxysurvey.com/services${serviceCategory ? '/' + serviceCategory : ''}`} />
+                {/* Structured data for services */}
+                <script type="application/ld+json">
+                {`
+                    {
+                        "@context": "https://schema.org",
+                        "@type": "Service",
+                        "serviceType": "${serviceCategory ? service.category : 'Professional Surveying Services'}",
+                        "provider": {
+                            "@type": "Organization",
+                            "name": "${serviceData.name}",
+                            "description": "A leading surveying firm in Nigeria",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "addressLocality": "Ibeju-Lekki",
+                                "addressRegion": "Lagos",
+                                "addressCountry": "Nigeria"
+                            }
+                        },
+                        "areaServed": {
+                            "@type": "Country",
+                            "name": "Nigeria"
+                        },
+                        "description": "${serviceCategory ? service.description : 'Professional surveying services including land, aerial, and hydrographic surveying with precision and integrity.'}",
+                        "offers": {
+                            "@type": "Offer",
+                            "availability": "https://schema.org/InStock"
+                        }
+                    }
+                `}
+                </script>
+            </Helmet>
             <Navbar />
             
             <main className="pt-20">
