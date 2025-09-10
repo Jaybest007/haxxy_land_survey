@@ -199,9 +199,7 @@ export const LandingPage = () => {
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-24">
                         <div className="md:flex items-center">
                             <div className="md:w-1/2 z-10 animate-fadeIn opacity-0">
-                                <span className="inline-block mt-3 py-1 px-3 rounded-full bg-lime-400/20 text-lime-400 font-semibold text-sm mb-5">
-                                    {companyData.rcNumber}
-                                </span>
+                                
                                 <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
                                     <span className="block mb-2">Transforming Spaces</span>
                                     <span className="text-gradient">Mapping Excellence</span>
