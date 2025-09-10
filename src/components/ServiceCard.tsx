@@ -7,7 +7,7 @@ interface ServiceCardProps {
     index: number;
 }
 
-export const ServiceCard = ({ category, items, image, index }: ServiceCardProps) => {
+export const ServiceCard = ({ category, items, image }: ServiceCardProps) => {
     // Create a URL-friendly version of the category for routing
     const categorySlug = category.toLowerCase().replace(/\s+/g, '-');
     

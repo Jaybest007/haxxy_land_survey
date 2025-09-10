@@ -7,7 +7,7 @@ interface TeamMemberProps {
     index: number;
 }
 
-export const TeamMemberCard = ({ name, role, experience, reg, img, index }: TeamMemberProps) => {
+export const TeamMemberCard = ({ name, role, experience, reg, img,  }: TeamMemberProps) => {
     return (
         <div className={`bg-white rounded-xl shadow-lg overflow-hidden group hover-lift scroll-reveal`}>
             <div className="relative h-64 bg-purple-200 overflow-hidden">
