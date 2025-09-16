@@ -60,7 +60,7 @@ const companyData = {
         address: "Km 36, Lekki-Epe Expressway, Mobil Filling Station, Oribanwa Bus-stop, Ibeju-Lekki, Lagos",
         email: "haxxysurvey@gmail.com",
         phones: ["07057711880", "09067899975"],
-        instagram: "@hazzysurvey"
+        instagram: "https://www.instagram.com/haxxysurvey?igsh=d252ZGYzdnphODhi"
     }
 
 };
@@ -515,7 +515,7 @@ export const LandingPage = () => {
                                     <div>
                                         {companyData.contact.phones.map((phone, index) => (
                                             <a href={`https://wa.me/234${phone.substring(1)}`} key={index} className="hover:text-lime-400 transition-colors">
-                                                {phone}
+                                                {phone}, {" "}
                                             </a>
                                         ))}
                                     </div>
@@ -525,7 +525,7 @@ export const LandingPage = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-lime-400 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
                                     </svg>
-                                    <p>{companyData.contact.instagram}</p>
+                                    <a href={companyData.contact.instagram} className="hover:text-lime-400 transition-colors">Haxxysurvey</a>
                                 </div>
                             </div>
                         </div>
