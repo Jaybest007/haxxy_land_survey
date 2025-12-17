@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 import main from '../assets/main.png';
 import { getMainProjectImage } from '../utils/projectImages';
 import { initScrollReveal, applyStaggeredAnimations } from '../utils/animations';
-import ContactForm from '../components/contactus';
+import ContactFormSection from '../components/ContactFormSection';
 
 // Define company data
 const companyData = {
@@ -531,7 +531,7 @@ export const LandingPage = () => {
                             </div>
                         </div>
                         
-                        <ContactForm />
+                        <ContactFormSection />
                     </div>
                 </div>
             </section>

@@ -1,8 +1,7 @@
-
 import { useForm, ValidationError } from "@formspree/react";
 import { useEffect, useRef } from "react";
 
-const ContactForm = () => {
+const ContactFormSection = () => {
     const [state, handleSubmit] = useForm("xjknndqd");
     const formRef = useRef<HTMLFormElement>(null);
     
@@ -38,7 +37,6 @@ const ContactForm = () => {
         <div className="bg-white p-8 rounded-xl shadow-lg">
             <h3 className="text-2xl font-bold text-purple-900 mb-6">Send Us a Message</h3>
             <form ref={formRef} onSubmit={handleSubmit}>
-                {/* name */}
                 <div className="mb-4">
                     <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
                         Name
@@ -108,4 +106,4 @@ const ContactForm = () => {
     );
 };
 
-export default ContactForm;
+export default ContactFormSection;
