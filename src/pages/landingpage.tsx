@@ -3,7 +3,6 @@ import { Navbar } from '../components/navbar';
 import { ServiceCard } from '../components/ServiceCard';
 import { ProjectCard } from '../components/ProjectCard';
 import { TeamMemberCard } from '../components/TeamMemberCard';
-import ContactForm from '../components/contactus';
 import surveyor_pic1 from '../assets/surv_hassan.png';
 import Hydrographic from '../assets/Hydrographic.png';
 import aerial_pic1 from '../assets/drone.png';
@@ -20,6 +19,7 @@ import { Link } from 'react-router-dom';
 import main from '../assets/main.png';
 import { getMainProjectImage } from '../utils/projectImages';
 import { initScrollReveal, applyStaggeredAnimations } from '../utils/animations';
+import ContactForm from '../components/contactus';
 
 // Define company data
 const companyData = {
