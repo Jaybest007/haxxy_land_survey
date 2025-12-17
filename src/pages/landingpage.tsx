@@ -3,6 +3,7 @@ import { Navbar } from '../components/navbar';
 import { ServiceCard } from '../components/ServiceCard';
 import { ProjectCard } from '../components/ProjectCard';
 import { TeamMemberCard } from '../components/TeamMemberCard';
+import ContactForm from '../components/contactus';
 import surveyor_pic1 from '../assets/surv_hassan.png';
 import Hydrographic from '../assets/Hydrographic.png';
 import aerial_pic1 from '../assets/drone.png';
@@ -530,39 +531,7 @@ export const LandingPage = () => {
                             </div>
                         </div>
                         
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
-                            <h3 className="text-2xl font-bold text-purple-900 mb-6">Send Us a Message</h3>
-                            <form>
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-                                        Name
-                                    </label>
-                                    <input className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" id="name" type="text" placeholder="Your Name" />
-                                </div>
-                                
-                                <div className="mb-4">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                                        Email
-                                    </label>
-                                    <input className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" id="email" type="email" placeholder="Your Email" />
-                                </div>
-                                
-                                <div className="mb-6">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
-                                        Message
-                                    </label>
-                                    <textarea className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" id="message" placeholder="Your Message" rows={4}></textarea>
-                                </div>
-                                
-                                <button 
-                                    className="w-full bg-lime-500 hover:bg-lime-600 text-purple-900 font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline shine-effect" 
-                                    type="button"
-                                    onClick={() => window.open('https://wa.me/2347057711880', '_blank')}
-                                >
-                                    Send Message
-                                </button>
-                            </form>
-                        </div>
+                        <ContactForm />
                     </div>
                 </div>
             </section>
